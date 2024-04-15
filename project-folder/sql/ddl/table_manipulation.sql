@@ -290,6 +290,18 @@ where tag like '?%';
 
 
 
+--DATA cleaning of movies table:
+
+UPDATE movielens.movies
+SET title = CASE 
+                WHEN PATINDEX('%[a-zA-Z]%', title) > 1 
+                THEN SUBSTRING(title, PATINDEX('%[a-zA-Z]%', title), LEN(title)) 
+                ELSE title 
+            END
+
+UPDATE  movielens.movies
+SET title = UPPER(LEFT(title, 1)) + LOWER(SUBSTRING(title, 2, LEN(title)))
+
 
 
 

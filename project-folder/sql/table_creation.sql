@@ -25,8 +25,8 @@ tagId INT NOT NULL,
 relevance DECIMAL(5,2));
 
 CREATE TABLE movieLens.tags(
-userId VARCHAR(20) ,
-movieId VARCHAR(20),
+userId INT ,
+movieId INT,
 tag VARCHAR(200),
 timestamp VARCHAR(20));
 

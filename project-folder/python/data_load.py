@@ -60,19 +60,19 @@ def main():
     # load_data(cursor, conn, genome_tags_data_path, sql_insert_query)
 
     # genome_scores
-    genome_scores_data_path = f'{file_path}genome-scores.csv'
-    sql_insert_query = 'INSERT INTO movieLens.genome_scores(movieId, tagId, relevance) VALUES (?, ?, ?)'
-    load_data(cursor, conn, genome_scores_data_path, sql_insert_query)
+    # genome_scores_data_path = f'{file_path}genome-scores.csv'
+    # sql_insert_query = 'INSERT INTO movieLens.genome_scores(movieId, tagId, relevance) VALUES (?, ?, ?)'
+    # load_data(cursor, conn, genome_scores_data_path, sql_insert_query)
 
-    # tags_df
+    # tags
     # tags_data_path = f'{file_path}tags.csv'
     # sql_insert_query = 'INSERT INTO movieLens.tags(userId, movieId, tag, timestamp) VALUES (?, ?, ?, ?)'
     # load_data(cursor, conn, tags_data_path, sql_insert_query)
 
-    # ratings_df
-    # ratings_data_path = f'{file_path}ratings.csv'
-    # sql_insert_query = 'INSERT INTO movieLens.rating(userId, movieId, rating, timestamp) VALUES (?, ?, ?, ?)'
-    # load_data(cursor, conn, ratings_data_path, sql_insert_query)
+    # rating
+    rating_data_path = f'{file_path}ratings.csv'
+    sql_insert_query = 'INSERT INTO movieLens.rating(userId, movieId, rating, timestamp) VALUES (?, ?, ?, ?)'
+    load_data(cursor, conn, rating_data_path, sql_insert_query)
 
     cursor.close()
     conn.close()

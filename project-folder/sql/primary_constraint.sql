@@ -1,14 +1,16 @@
 USE project_db;
 /*
-1. Datatype Format, typeCast it
-2. Check constraint
+Primary key constraint eligibilty: UNIQUE + NOT NULL
+1. Check Primary key constraint
+2. Remove the NUll Value
+3. Remove Duplicacy
 */
---To check the primary key constraint in the table
+--To check the constraint in the table
 SELECT CONSTRAINT_NAME, CONSTRAINT_TYPE
 FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
-WHERE TABLE_NAME='table_name';
+WHERE TABLE_NAME='movies';
 
---apply the constraint 
+/* movieLens.movies Table */
 --check the null constraint eligibilty
 SELECT * FROM movieLens.movies
 WHERE title IS NULL;
@@ -27,10 +29,8 @@ WHERE title is NULL
 ALTER TABLE movieLens.movies 
 ADD CONSTRAINT pk_movie PRIMARY KEY (movieId);
 
--- movieLens.genome_scores
+/*movieLens.genome_scores Table*/
 -- check the primary key if not there apply
-
---apply the constraint 
 --check the primary key constraint eligibilty
 SELECT 
     (SELECT COUNT(*) FROM movieLens.genome_scores) AS total_rows,
@@ -45,19 +45,21 @@ FROM
 WHERE 
 	movieId IS NULL;
 
-SELECT COUNT(*) AS num_null_movieId
-FROM movieLens.genome_scores
-WHERE tagId IS NULL;
+SELECT 
+	COUNT(*) AS num_null_movieId
+FROM 
+	movieLens.genome_scores
+WHERE 
+	tagId IS NULL;
 
 --now add the primary key
 ALTER TABLE movieLens.genome_scores
 ADD CONSTRAINT pk_genome_scores  PRIMARY KEY(movieId, tagId);
 
--- movieLens.genome_tags all good
+/* movieLens.genome_tags Table all good */
 
--- movieLens.links
+/* movieLens.links table */
 -- check the primary key if not there apply
--- apply the constraint 
 -- check the primary key constraint eligibilty
 
 -- check the duplicacy:
@@ -127,9 +129,8 @@ ALTER COLUMN tmdbId INT NOT NULL;
 ALTER TABLE movieLens.links
 ADD CONSTRAINT pk_links PRIMARY KEY(movieId, imdbId, tmdbId);
 
--- movieLens.rating
+/* movieLens.rating Table */
 -- check the primary key if not there apply
-
 -- check the duplicacy
 SELECT userId, movieId, COUNT(*) AS num_duplicates
 FROM movieLens.rating
@@ -152,37 +153,8 @@ ALTER TABLE movielens.rating
 ADD CONSTRAINT pk_ratings PRIMARY KEY (userId, movieId);
 
 
--- movieLens.tags
-SELECT
-	TABLE_NAME,
-	COLUMN_NAME,
-	DATA_TYPE,
-	CHARACTER_MAXIMUM_LENGTH
-FROM information_schema.columns 
-WHERE table_name = 'tags'
-
--- formatting column datatype: in sqlserver altering the column, only one column in one command
-ALTER TABLE movieLens.tags
-ALTER COLUMN userId INT;
-
-ALTER TABLE movieLens.tags
-ALTER COLUMN movieId INT;
-
-UPDATE movieLens.tags
-set timestamp = DATEADD(second, CAST(timestamp as BIGINT), '1970-01-01');
-
-ALTER TABLE movieLens.tags
-ALTER COLUMN timestamp DATE;
-
-select top 5 * from movielens.tags 
--- Assuming the timestamp value is stored in a column named 'timestamp_column' in a table named 'your_table_name'
-SELECT DATEADD(second, 1439472355, '1970-01-01') AS readable_timestamp;
-
-UPDATE movielens.tags
-set tag = 'unknown tag'
-where tag like '??%';
-
-
+/* movieLens.tags Table */
+-- check the primary key if not there apply
 SELECT 
 	userid,
 	movieid,
@@ -192,13 +164,7 @@ from movieLens.tags
 group by userid, movieId, tag
 having count(*)>1;
 
-SELECT
-	userid,
-	movieid,
-	tag
-from movieLens.tags
-where tag like '??%';
-
+-- remove the duplicate
 WITH duplicates_cte as(
 select
 	userId,
@@ -209,63 +175,28 @@ from movieLens.tags)
 delete from duplicates_cte
 where rnk > 1;
 
+-- check the null values
 SELECT
 	*
 from movieLens.tags
 where tag is NULL;
 
---set column as null;
+-- apply the null constraint
 ALTER table movieLens.tags
 ALTER COLUMN userId INT NOT NULL;
 
 ALTER table movieLens.tags
 ALTER COLUMN movieId INT NOT NULL;
 
-ALTER table movieLens.tags
-ALTER COLUMN tag varchar(200) NOT NULL;
-
+-- Finally apply the primary key constraint
 ALTER table movieLens.tags
 ADD CONSTRAINT pk_tags PRIMARY KEY(userId, movieId, tag);
 
---
-
-
-select * from movielens.movies
-where title like '?%' or genres like '?%';
-
-DELETE FROM movielens.movies
-where title like '?%' or genres like '?%';
-
-select top 5 * from movielens.rating
--- need to change timestamp into readble format;
-UPDATE movieLens.rating
-SET timestamp = DATEADD(SECOND, CAST(timestamp AS FLOAT), '1970-01-01')
-WHERE ISNUMERIC(timestamp) = 1;
-
-ALTER TABLE movieLens.rating
-ALTER COLUMN timestamp DATE;
-
-
-select * from movielens.tags
-where tag like '?%';
-
-DELETE FROM movielens.tags
-where tag like '?%';
--- with this DATA cleaning completed
 
 
 
---DATA cleaning of movies table:
 
-UPDATE movielens.movies
-SET title = CASE 
-                WHEN PATINDEX('%[a-zA-Z]%', title) > 1 
-                THEN SUBSTRING(title, PATINDEX('%[a-zA-Z]%', title), LEN(title)) 
-                ELSE title 
-            END
 
-UPDATE  movielens.movies
-SET title = UPPER(LEFT(title, 1)) + LOWER(SUBSTRING(title, 2, LEN(title)))
 
 
 

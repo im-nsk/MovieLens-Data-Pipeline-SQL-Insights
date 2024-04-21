@@ -1,4 +1,5 @@
 # MovieLens-Data-Pipeline-SQL-Insights
+0. Download data from the site
 1. Create Database, Schema, Tables
 2. Establish Connection between Python & SQL SERVER
 3. Load the data from local to Db by python
@@ -10,3 +11,7 @@
 
  * Data Operation
 5. Create Dashboard
+
+python library:
+pandas
+pyodbc

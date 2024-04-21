@@ -45,29 +45,29 @@ def main():
         exit()
 
     #movie table
-    # movie_data_path = f'{file_path}movies.csv'
-    # sql_insert_query = 'INSERT INTO movieLens.movies(movieId,title, genres) VALUES (?, ?, ?)'
-    # load_data(cursor, conn, movie_data_path, sql_insert_query)
+    movie_data_path = f'{file_path}movies.csv'
+    sql_insert_query = 'INSERT INTO movieLens.movies(movieId,title, genres) VALUES (?, ?, ?)'
+    load_data(cursor, conn, movie_data_path, sql_insert_query)
 
     # link
-    # links_data_path = f'{file_path}links.csv'
-    # sql_insert_query = 'INSERT INTO movieLens.links(movieId, imdbId, tmdbId) VALUES (?, ?, ?)'
-    # load_data_without_batch(cursor, conn, links_data_path, sql_insert_query)
+    links_data_path = f'{file_path}links.csv'
+    sql_insert_query = 'INSERT INTO movieLens.links(movieId, imdbId, tmdbId) VALUES (?, ?, ?)'
+    load_data_without_batch(cursor, conn, links_data_path, sql_insert_query)
 
     # genome_tags_df
-    # genome_tags_data_path = f'{file_path}genome-tags.csv'
-    # sql_insert_query = 'INSERT INTO movieLens.genome_tags(tagId, tag) VALUES (?, ?)'
-    # load_data(cursor, conn, genome_tags_data_path, sql_insert_query)
+    genome_tags_data_path = f'{file_path}genome-tags.csv'
+    sql_insert_query = 'INSERT INTO movieLens.genome_tags(tagId, tag) VALUES (?, ?)'
+    load_data(cursor, conn, genome_tags_data_path, sql_insert_query)
 
     # genome_scores
-    # genome_scores_data_path = f'{file_path}genome-scores.csv'
-    # sql_insert_query = 'INSERT INTO movieLens.genome_scores(movieId, tagId, relevance) VALUES (?, ?, ?)'
-    # load_data(cursor, conn, genome_scores_data_path, sql_insert_query)
+    genome_scores_data_path = f'{file_path}genome-scores.csv'
+    sql_insert_query = 'INSERT INTO movieLens.genome_scores(movieId, tagId, relevance) VALUES (?, ?, ?)'
+    load_data(cursor, conn, genome_scores_data_path, sql_insert_query)
 
     # tags
-    # tags_data_path = f'{file_path}tags.csv'
-    # sql_insert_query = 'INSERT INTO movieLens.tags(userId, movieId, tag, timestamp) VALUES (?, ?, ?, ?)'
-    # load_data(cursor, conn, tags_data_path, sql_insert_query)
+    tags_data_path = f'{file_path}tags.csv'
+    sql_insert_query = 'INSERT INTO movieLens.tags(userId, movieId, tag, timestamp) VALUES (?, ?, ?, ?)'
+    load_data(cursor, conn, tags_data_path, sql_insert_query)
 
     # rating
     rating_data_path = f'{file_path}ratings.csv'

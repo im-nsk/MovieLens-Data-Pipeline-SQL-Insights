@@ -3,7 +3,7 @@
 link: https://www.kaggle.com/datasets/grouplens/movielens-20m-dataset
 
 Run on the CMD
-curl -o C:\replace\by\your\directory https://replace/by/dataset/link
+curl -o C:\replace\by\your\directory http//replace/by/dataset/link
 
 ## Loading Data into Database:
 Use Python and the pyodbc library to connect to your SQL Server database.

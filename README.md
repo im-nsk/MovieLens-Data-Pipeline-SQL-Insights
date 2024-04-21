@@ -3,4 +3,10 @@
 2. Establish Connection between Python & SQL SERVER
 3. Load the data from local to Db by python
 4. Start deep dive in SQL
+ * Data cleaning
+ * Data formatting
+ * Constraint Applying
+ * Index Creation
+
+ * Data Operation
 5. Create Dashboard

@@ -1,6 +1,6 @@
 # MovieLens-Data-Pipeline-SQL-Insights
 ## Download the dataset using CMD:
-link for MovieLens Dataset: https://www.kaggle.com/datasets/grouplens/movielens-20m-dataset
+Link for MovieLens Dataset: https://www.kaggle.com/datasets/grouplens/movielens-20m-dataset
 
 Run on the CMD
 curl -o C:\replace\by\your\directory http//replace/by/dataset/link
